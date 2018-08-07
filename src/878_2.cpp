@@ -17,31 +17,25 @@ public:
   int nthMagicalNumber(int N, int A, int B) {
     int mod = 1e9 + 7;
     int lcm = A / gcd(A, B) * B;
-    int ans = 0;
-    int n = lcm / A + lcm / B - 1;
-    int m = N / n;
-    int r = N % n;
 
-    ans = (long)lcm * m % mod;
-    if (r == 0) {
-    } else {
-      vector<int> tmp = {A, B};
-      for (int i = 0; i < r - 1; i++) {
-        if (tmp[0] < tmp[1]) {
-          tmp[0] += A;
-        } else {
-          tmp[1] += B;
-        }
+    long lo = 0;
+    long hi = 1e15;
+
+    while (lo < hi) {
+      long mid = lo + (hi - lo) / 2;
+      if (mid / A + mid / B - mid / lcm < N) {
+        lo = mid + 1;
+      } else {
+        hi = mid;
       }
-      ans = (ans + min(tmp[0], tmp[1]) % mod) % mod;
     }
-    return ans;
+    return lo % mod;
   }
 };
 
 int main() {
   Solution solution = Solution();
-  cout << solution.nthMagicalNumber(4, 2, 3);
+  cout << solution.nthMagicalNumber(3, 8, 9);
 
   return 0;
 }
