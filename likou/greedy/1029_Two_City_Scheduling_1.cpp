@@ -1,3 +1,5 @@
+// 1029_Two_City_Scheduling
+// greedy
 class Solution {
 public:
   int twoCitySchedCost(vector<vector<int>> &costs) {
