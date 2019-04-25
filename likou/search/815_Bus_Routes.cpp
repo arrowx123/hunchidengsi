@@ -1,5 +1,6 @@
 // 815_Bus_Routes
 // bfs
+// route -> route
 class Solution {
 private:
   bool isConnected(vector<int> v1, vector<int> v2) {
