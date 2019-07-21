@@ -4,27 +4,33 @@ class Solution {
 private:
   int k;
   int bf(string &s, int l, int r) {
-    cout << l << " " << r << endl;
-
-    if (l == r)
-      return 0;
     unordered_map<char, int> cnt;
     for (int i = l; i < r; i++)
       cnt[s[i]]++;
 
-    int i = l;
-    for (; i < r; i++)
-      if (cnt[s[i]] >= k)
-        break;
-    int len = r - i;
-    for (; i < r; i++) {
-      if (cnt[s[i]] < k) {
-        int cnt1 = bf(s, l, i);
-        int cnt2 = bf(s, i + 1, r);
-        return max(cnt1, cnt2);
+    int ret = 0;
+    for (int i = l; i < r; i++) {
+
+      int start = i;
+      while (start < r) {
+        if (cnt[s[start]] >= k)
+          break;
+        start++;
       }
+
+      int end = start;
+      while (end < r) {
+        if (cnt[s[end]] < k)
+          break;
+        end++;
+      }
+
+      if (start == l && end == r)
+        return r - l;
+      ret = max(ret, bf(s, start, end));
+      i = end;
     }
-    return len;
+    return ret;
   }
 
 public:
