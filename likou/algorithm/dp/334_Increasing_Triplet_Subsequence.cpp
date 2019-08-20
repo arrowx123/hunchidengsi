@@ -1,5 +1,6 @@
 // 334_Increasing_Triplet_Subsequence
 // dp
+// O(n)
 class Solution {
 public:
   bool increasingTriplet(vector<int> &nums) {
